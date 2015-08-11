@@ -15,6 +15,11 @@ abstract class CRM_Streetimport_StreetimportRecordHandler extends CRM_Streetimpo
    */
   protected $created_recruiters = array();
 
+  /**
+   * this will store the (Campaign ID => campaign_id|'') that have been checked for existance
+   */
+  protected $checked_campaigns = array();
+
 
   protected function getConfigValue($key) {
     $returnValue = 'LOOKUP-ERROR';
@@ -605,15 +610,27 @@ abstract class CRM_Streetimport_StreetimportRecordHandler extends CRM_Streetimpo
    * the API expects '' instead of '0'.
    */
   public function getCampaignParameter($record) {
-
-    // TODO: verify if campaign exists?
-
     $campaign_id = (int) CRM_Utils_Array::value("Campaign ID", $record);
     if ($campaign_id) {
-      return $campaign_id;
-    } else {
-      return '';
+      // verify if the campaign exists
+      // ...but first, check if we have already done this:
+      if (isset($this->checked_campaigns[$campaign_id])) {
+        return $this->checked_campaigns[$campaign_id];
+      }
+      
+      // ...no? Ok, let's look it up
+      $result = civicrm_api3('Campaign', 'get', array('id' => $campaign_id));
+      if ($result['count']==1) {
+        $this->checked_campaigns[$campaign_id] = $campaign_id;
+        return $campaign_id;
+      } else {
+        $this->checked_campaigns[$campaign_id] = '';
+        $config = CRM_Streetimport_Config::singleton();
+        $this->logger->logError(sprintf($config->translate("Campaign '%s' doesn't exist. Ignored"), $campaign_id));
+      }
     }
+
+    return '';
   }
 
   /**
