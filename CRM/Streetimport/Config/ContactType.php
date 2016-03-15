@@ -28,6 +28,9 @@ class CRM_Streetimport_Config_ContactType {
       throw new Exception('Missing mandatory param name in class CRM_Streetimport_Config_ContactType');
     }
     $this->_apiParams = $params;
+    if (!isset($params['is_active'])) {
+      $this->_apiParams['is_active'] = 1;
+    }
   }
 
   /**

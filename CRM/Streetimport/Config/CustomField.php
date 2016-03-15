@@ -30,7 +30,7 @@ class CRM_Streetimport_Config_CustomField {
       mandatory parameters and can not be empty in class CRM_Streetimport_Config_CustomField');
     }
     $this->_apiParams = $params;
-    if (isset($this->_apiParams['option_group'])) {
+    if (isset($params['option_group'])) {
       $this->_apiParams['option_type'] = 0;
       $optionGroup = new CRM_Streetimport_Config_OptionGroup();
       $found = $optionGroup->getWithName($this->_apiParams['option_group']);
@@ -51,6 +51,8 @@ class CRM_Streetimport_Config_CustomField {
    * @throws Exception when error from API CustomField Create
    */
   public function create($params) {
+    if ($params['name'] != "recruiting_organization_id" && $params['name'] != "external_donor_id") {
+    }
     $this->validateCreateParams($params);
     $existing = $this->getWithNameCustomGroupId($this->_apiParams['name'], $this->_apiParams['custom_group_id']);
     if (isset($existing['id'])) {
