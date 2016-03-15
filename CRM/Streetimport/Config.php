@@ -68,6 +68,15 @@ class CRM_Streetimport_Config {
   }
 
   /**
+   * Method to get resource path
+   *
+   * @return string
+   * @access public
+   */
+  public function getResourcePath() {
+    return $this->resourcesPath;
+  }
+  /**
    * Method to get option group for loading types
    *
    * @return mixed
@@ -747,7 +756,7 @@ class CRM_Streetimport_Config {
   }
 
   /**
-   * Method to create or get activity types
+   * Method to get activity types
    *
    * @throws Exception when resource file could not be loaded
    */
@@ -761,16 +770,8 @@ class CRM_Streetimport_Config {
     $activityTypes = json_decode($activityTypesJson, true);
     foreach ($activityTypes as $activityTypeName => $activityTypeLabel) {
       $propertyName = $activityTypeName.'ActivityType';
-      $activityType = CRM_Streetimport_Utils::getActivityTypeWithName($activityTypeName);
-      if (!$activityType) {
-        $params = array(
-          'name' => $activityTypeName,
-          'label' => $activityTypeLabel,
-          'is_active' => 1,
-          'is_reserved' => 1);
-        $activityType = CRM_Streetimport_Utils::createActivityType($params);
-      }
-      $this->$propertyName = $activityType;
+      $activityType = new CRM_Streetimport_Config_ActivityType();
+      $this->$propertyName = $activityType->getWithNameAndOptionGroupId($activityTypeName, $activityType->getOptionGroupId());
     }
   }
 
@@ -789,11 +790,8 @@ class CRM_Streetimport_Config {
     $relationshipTypes = json_decode($relationshipTypesJson, true);
     foreach ($relationshipTypes as $relationName => $params) {
       $propertyName = $relationName.'RelationshipType';
-      $relationshipType = CRM_Streetimport_Utils::getRelationshipTypeWithName($params['name_a_b']);
-      if (!$relationshipType) {
-        $relationshipType = CRM_Streetimport_Utils::createRelationshipType($params);
-      }
-      $this->$propertyName = $relationshipType;
+      $relationshipType = new CRM_Streetimport_Config_RelationshipType();
+      $this->$propertyName = $relationshipType->getWithNameAb($params['name_a_b']);
     }
   }
 
@@ -813,11 +811,8 @@ class CRM_Streetimport_Config {
     $contactSubTypes = json_decode($contactTypesJson, true);
     foreach ($contactSubTypes as $params) {
       $propertyName = $params['name'] . 'ContactSubType';
-      $contactSubType = CRM_Streetimport_Utils::getContactSubTypeWithName($params['name']);
-      if (!$contactSubType) {
-        $contactSubType = CRM_Streetimport_Utils::createContactSubType($params);
-      }
-      $this->$propertyName = $contactSubType;
+      $contactType = new CRM_Streetimport_Config_ContactType();
+      $this->$propertyName = $contactType->getWithName($params['name']);
     }
   }
 
@@ -837,11 +832,8 @@ class CRM_Streetimport_Config {
     $optionGroups = json_decode($optionGroupsJson, true);
     foreach ($optionGroups as $name => $title) {
       $propertyName = $name.'OptionGroup';
-      $optionGroup = CRM_Streetimport_Utils::getOptionGroupWithName($name);
-      if (empty($optionGroup)) {
-        $optionGroup = CRM_Streetimport_Utils::createOptionGroup(array('name' => $name, 'title' => $title));
-      }
-      $this->$propertyName = $optionGroup;
+      $optionGroup = new CRM_Streetimport_Config_OptionGroup();
+      $this->$propertyName = $optionGroup->getWithName($name);
     }
   }
 
@@ -859,12 +851,10 @@ class CRM_Streetimport_Config {
     $groupJson = file_get_contents($jsonFile);
     $groups = json_decode($groupJson, true);
     foreach ($groups as $params) {
-      $group = CRM_Streetimport_Utils::getGroupWithName($params['name']);
-      if (!$group) {
-        CRM_Streetimport_Utils::createGroup($params);
-      }
+      $group = new CRM_Streetimport_Config_Group();
+      $existing = $group->getWithName($params['name']);
       if ($params['name'] == "recruiting_organizations") {
-        $this->recruitingOrganizationsGroupId = $group['id'];
+        $this->recruitingOrganizationsGroupId = $existing['id'];
       }
     }
   }
@@ -882,76 +872,20 @@ class CRM_Streetimport_Config {
     }
     $customDataJson = file_get_contents($jsonFile);
     $customData = json_decode($customDataJson, true);
-
     foreach ($customData as $customGroupName => $customGroupData) {
       $propertyCustomGroup = $customGroupName.'CustomGroup';
-      $customGroup = CRM_Streetimport_Utils::getCustomGroupWithName($customGroupName);
-      if (!$customGroup) {
-        $customGroupParams = $this->buildCustomGroupParams($customGroupData);
-        $customGroup = CRM_Streetimport_Utils::createCustomGroup($customGroupParams);
-      }
-      $this->$propertyCustomGroup = $customGroup;
+      $customGroup = new CRM_Streetimport_Config_CustomGroup();
+      $existingCustomGroup = $customGroup->getWithName($customGroupName);
+      $this->$propertyCustomGroup = $existingCustomGroup;
       $propertyCustomFields = $customGroupName.'CustomFields';
-      $createdCustomFields = array();
+      $customFields = array();
       foreach ($customGroupData['fields'] as $customFieldName => $customFieldData) {
-        $customField = CRM_Streetimport_Utils::getCustomFieldWithNameCustomGroupId($customFieldName, $customGroup['id']);
-        if (!$customField) {
-          $customFieldData['custom_group_id'] = $customGroup['id'];
-          if ($customFieldName = 'recruiting_organization_id') {
-            $customFieldData['filter'] = 'action=lookup&group='.$this->recruitingOrganizationsGroupId;
-          }
-          $customFieldParams = $customFieldData;
-          $customField = CRM_Streetimport_Utils::createCustomField($customFieldParams);
-        }
-        $customFieldId = $customField['id'];
-        $createdCustomFields[$customFieldId] = $customField;
+        $customField = new CRM_Streetimport_Config_CustomField();
+        $existingCustomField = $customField->getWithNameCustomGroupId($customFieldName, $existingCustomGroup['id']);
+        $customFields[$existingCustomField['id']] = $existingCustomField;
       }
-      $this->$propertyCustomFields = $createdCustomFields;
+      $this->$propertyCustomFields = $customFields;
     }
-  }
-
-  /**
-   * Method to build param list for custom group creation
-   *
-   * @param array $customGroupData
-   * @return array $customGroupParams
-   * @access protected
-   */
-  protected function buildCustomGroupParams($customGroupData) {
-    $customGroupParams = array();
-    foreach ($customGroupData as $name => $value) {
-      if ($name != 'fields') {
-        $customGroupParams[$name] = $value;
-      }
-    }
-    if ($customGroupParams['extends'] == 'Activity') {
-      $extendsActivity = CRM_Streetimport_Utils::getActivityTypeWithName($customGroupData['extends_entity_column_value']);
-      $customGroupParams['extends_entity_column_value'] = CRM_Core_DAO::VALUE_SEPARATOR.$extendsActivity['value'];
-    }
-    return $customGroupParams;
-  }
-
-  /**
-   * Method to build param list for custom field creation
-   *
-   * @param array $customFieldData
-   * @return array $customFieldParams
-   * @access protected
-   */
-  protected function buildCustomFieldParams($customFieldData) {
-    $customFieldParams = array();
-    foreach ($customFieldData as $name => $value) {
-      if ($name == "option_group") {
-        $optionGroup = CRM_Streetimport_Utils::getOptionGroupWithName($value);
-        if (empty($optionGroup)) {
-          $optionGroup = CRM_Streetimport_Utils::createOptionGroup(array('name' => $value));
-        }
-        $customFieldParams['option_group_id'] = $optionGroup['id'];
-      } else {
-        $customFieldParams[$name] = $value;
-      }
-    }
-    return $customFieldParams;
   }
 
   /**

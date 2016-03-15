@@ -1,7 +1,7 @@
 {
-  "externalDonorId":{
-    "name":"externalDonorId",
-    "title":"Externe Donor Identificatie",
+  "external_donor_id":{
+    "name":"external_donor_id",
+    "title":"External Donor Identification",
     "extends":"Contact",
     "style":"Tab",
     "is_multiple":1,
@@ -12,7 +12,7 @@
     "fields":{
       "recruiting_organization_id":{
         "name":"recruiting_organization_id",
-        "label":"Wervingsorganisatie",
+        "label":"Recruiting Organization",
         "data_type":"ContactReference",
         "html_type":"Autocomplete-Select",
         "is_searchable":1,
@@ -23,7 +23,7 @@
       },
       "external_donor_id":{
         "name":"external_donor_id",
-        "label":"Extern Donor ID",
+        "label":"External Donor ID",
         "data_type":"String",
         "html_type":"Text",
         "is_searchable":1,
@@ -34,403 +34,731 @@
       }
     }
   },
-  "streetRecruitment":{
-    "name":"streetRecruitment",
-    "title":"Specifieke gegevens straatwerving",
+  "initial_recruitment":{
+    "name":"initial_recruitment",
+    "title":"Initial Recruitment with SDD",
     "extends":"Activity",
-    "extends_entity_column_value":"streetRecruitment",
-    "table_name":"civicrm_value_street_recruitment",
+    "extends_entity_column_value":"initial_recruitment",
+    "table_name":"civicrm_value_initial_recruitment",
     "is_reserved":1,
     "collapse_display":0,
     "is_active":1,
     "fields":{
-      "new_date_import":{
-        "name":"new_date_import",
-        "label":"Importdatum",
+      "date_import":{
+        "name":"date_import",
+        "label":"Date Import",
         "data_type":"Date",
         "html_type":"Select Date",
         "is_searchable":1,
         "is_search_range":1,
         "is_view":1,
         "date_format":"dd-mm-yy",
-        "column_name":"new_date_import",
+        "column_name":"date_import",
         "weight":-160,
         "is_active":1
       },
-      "new_follow_up_call":{
-        "name":"new_follow_up_call",
-        "label":"Opvolgingsgesprek?",
+      "follow_up_call":{
+        "name":"follow_up_call",
+        "label":"Follow Up Call?",
         "data_type":"Boolean",
         "html_type":"Radio",
         "is_searchable":1,
         "is_view":1,
-        "column_name":"new_follow_up_call",
+        "column_name":"follow_up_call",
         "weight":-150,
         "is_active":1
       },
-      "new_newsletter":{
-        "name":"new_newsletter",
-        "label":"Nieuwsbrief?",
+      "newsletter":{
+        "name":"newsletter",
+        "label":"Newsletter?",
         "data_type":"Boolean",
         "html_type":"Radio",
         "is_searchable":1,
         "is_view":1,
-        "column_name":"new_newsletter",
+        "column_name":"newsletter",
         "weight":-140,
         "is_active":1
       },
-      "new_member":{
-        "name":"new_member",
-        "label":"Lid worden?",
+      "member":{
+        "name":"member",
+        "label":"Member?",
         "data_type":"Boolean",
         "html_type":"Radio",
         "is_searchable":1,
         "is_view":1,
-        "column_name":"new_member",
+        "column_name":"member",
         "weight":-130,
         "is_active":1
       },
-      "new_areas_interest":{
-        "name":"new_areas_interest",
-        "label":"Interesse in campagnes",
+      "areas_interest":{
+        "name":"areas_interest",
+        "label":"Areas of Interest",
         "data_type":"String",
         "html_type":"Multi-Select",
-        "option_group":"areasOfInterest",
+        "option_group":"areas_of_interest",
         "is_searchable":1,
         "is_view":1,
-        "column_name":"new_areas_interest",
+        "column_name":"areas_interest",
         "weight":-120,
         "is_active":1
       },
-      "new_remarks":{
-        "name":"new_remarks",
-        "label":"Opmerkingen",
+      "remarks":{
+        "name":"remarks",
+        "label":"Remarks",
         "data_type":"Memo",
         "html_type":"TextArea",
         "is_searchable":0,
         "is_view":1,
-        "column_name":"new_remarks",
+        "column_name":"remarks",
         "weight":-110,
         "is_active":1
       },
-      "new_sdd_mandate":{
-        "name":"new_sdd_mandate",
-        "label":"Mandaatcode",
+      "sdd_mandate":{
+        "name":"sdd_mandate",
+        "label":"SDD Mandate",
         "data_type":"String",
         "html_type":"Text",
         "text_length":35,
         "is_searchable":1,
         "is_view":1,
-        "column_name":"new_sdd_mandate",
+        "column_name":"sdd_mandate",
         "weight":-100,
         "is_active":1
       },
-      "new_sdd_iban":{
-        "name":"new_sdd_iban",
+      "sdd_iban":{
+        "name":"sdd_iban",
         "label":"IBAN",
         "data_type":"String",
         "html_type":"Text",
         "text_length":34,
         "is_searchable":0,
         "is_view":1,
-        "column_name":"new_sdd_iban",
+        "column_name":"sdd_iban",
         "weight":-90,
         "is_active":1
       },
-      "new_sdd_bank_name":{
-        "name":"new_sdd_bank_name",
-        "label":"Banknaam",
+      "sdd_bank_name":{
+        "name":"sdd_bank_name",
+        "label":"Bankname",
         "data_type":"String",
         "html_type":"Text",
         "is_searchable":0,
         "is_view":1,
-        "column_name":"new_sdd_bank_name",
+        "column_name":"sdd_bank_name",
         "weight":-80,
         "is_active":1
       },
-      "new_sdd_bic":{
-        "name":"new_sdd_bic",
+      "sdd_bic":{
+        "name":"sdd_bic",
         "label":"BIC",
         "data_type":"String",
         "html_type":"Text",
         "text_length":11,
         "is_searchable":0,
         "is_view":1,
-        "column_name":"new_sdd_bic",
+        "column_name":"sdd_bic",
         "weight":-70,
         "is_active":1
       },
-      "new_sdd_amount":{
-        "name":"new_sdd_amount",
-        "label":"Bedrag",
+      "sdd_amount":{
+        "name":"sdd_amount",
+        "label":"Amount",
         "data_type":"Money",
         "html_type":"Text",
         "is_searchable":0,
         "is_view":1,
-        "column_name":"new_sdd_amount",
+        "column_name":"sdd_amount",
         "weight":-60,
         "is_active":1
       },
-      "new_sdd_freq_interval":{
-        "name":"new_sdd_freq_interval",
-        "label":"Frequentie interval",
+      "sdd_freq_interval":{
+        "name":"sdd_freq_interval",
+        "label":"Frequency Interval",
         "data_type":"Int",
         "html_type":"Text",
         "is_searchable":0,
         "is_view":1,
-        "column_name":"new_sdd_freq_interval",
+        "column_name":"sdd_freq_interval",
         "weight":-50,
         "is_active":1
       },
-      "new_sdd_freq_unit":{
-        "name":"new_sdd_freq_unit",
-        "label":"Frequentie eenheid",
-        "option_group":"frequenceUnit",
+      "sdd_freq_unit":{
+        "name":"sdd_freq_unit",
+        "label":"Frequency Unit",
+        "option_group":"frequency_unit",
         "data_type":"String",
         "html_type":"Select",
         "is_searchable":0,
         "is_view":1,
-        "column_name":"new_sdd_freq_unit",
+        "column_name":"sdd_freq_unit",
         "weight":-40,
         "is_active":1
       },
-      "new_sdd_start_date":{
-        "name":"new_sdd_start_date",
-        "label":"Begindatum",
+      "sdd_start_date":{
+        "name":"sdd_start_date",
+        "label":"Start Date",
         "data_type":"Date",
         "html_type":"Select Date",
         "is_searchable":0,
         "is_view":1,
         "date_format":"dd-mm-yy",
-        "column_name":"new_sdd_start_date",
+        "column_name":"sdd_start_date",
         "weight":-30,
         "is_active":1
       },
-      "new_sdd_end_date":{
-        "name":"new_sdd_end_date",
-        "label":"Einddatum",
+      "sdd_end_date":{
+        "name":"sdd_end_date",
+        "label":"End Date",
         "data_type":"Date",
         "html_type":"Select Date",
         "is_searchable":0,
         "is_view":1,
         "date_format":"dd-mm-yy",
-        "column_name":"new_sdd_end_date",
+        "column_name":"sdd_end_date",
         "weight":-20,
         "is_active":1
       },
-      "new_sdd_cancel":{
-        "name":"new_sdd_cancel",
-        "label":"Annulering gift?",
+      "sdd_cancel":{
+        "name":"sdd_cancel",
+        "label":"Cancel SDD?",
         "data_type":"Boolean",
         "html_type":"Radio",
         "is_searchable":1,
         "is_view":1,
-        "column_name":"new_sdd_cancel",
+        "column_name":"sdd_cancel",
         "weight":-10,
         "is_active":1
       }
     }
   },
-  "welcomeCall":{
-    "name":"welcomeCall",
-    "title":"Specifieke gegevens welkomstgesprek",
+  "welcome_call":{
+    "name":"welcome_call",
+    "title":"Welcome Call",
     "extends":"Activity",
-    "extends_entity_column_value":"welcomeCall",
+    "extends_entity_column_value":"welcome_call",
     "table_name":"civicrm_value_welcome_call",
     "is_reserved":1,
     "collapse_display":0,
     "is_active":1,
     "fields":{
-      "wc_date_import":{
-        "name":"wc_date_import",
-        "label":"Importdatum",
+      "date_import":{
+        "name":"date_import",
+        "label":"Date Import",
         "data_type":"Date",
         "html_type":"Select Date",
         "is_searchable":1,
         "is_search_range":1,
         "is_view":1,
         "date_format":"dd-mm-yy",
-        "column_name":"wc_date_import",
+        "column_name":"date_import",
         "weight":-160,
         "is_active":1
       },
-      "wc_follow_up_call":{
-        "name":"wc_follow_up_call",
-        "label":"Opvolgingsgesprek?",
+      "follow_up_call":{
+        "name":"follow_up_call",
+        "label":"Follow Up Call?",
         "data_type":"Boolean",
         "html_type":"Radio",
         "is_searchable":1,
         "is_view":1,
-        "column_name":"wc_follow_up_call",
+        "column_name":"follow_up_call",
         "weight":-150,
         "is_active":1
       },
-      "wc_newsletter":{
-        "name":"wc_newsletter",
-        "label":"Nieuwsbrief?",
+      "newsletter":{
+        "name":"newsletter",
+        "label":"Newsletter?",
         "data_type":"Boolean",
         "html_type":"Radio",
         "is_searchable":1,
         "is_view":1,
-        "column_name":"wc_newsletter",
+        "column_name":"newsletter",
         "weight":-140,
         "is_active":1
       },
-      "wc_member":{
-        "name":"wc_member",
-        "label":"Lid worden?",
+      "member":{
+        "name":"member",
+        "label":"Member?",
         "data_type":"Boolean",
         "html_type":"Radio",
         "is_searchable":1,
         "is_view":1,
-        "column_name":"wc_member",
+        "column_name":"member",
         "weight":-130,
         "is_active":1
       },
-      "wc_areas_interest":{
-        "name":"wc_areas_interest",
-        "label":"Interesse in campagnes",
+      "areas_interest":{
+        "name":"areas_interest",
+        "label":"Areas of Interest",
         "data_type":"String",
         "html_type":"Multi-Select",
-        "option_group":"areasOfInterest",
+        "option_group":"areas_of_interest",
         "is_searchable":1,
         "is_view":1,
-        "column_name":"wc_areas_interest",
+        "column_name":"areas_interest",
         "weight":-120,
         "is_active":1
       },
-      "wc_remarks":{
-        "name":"wc_remarks",
-        "label":"Opmerkingen",
+      "remarks":{
+        "name":"remarks",
+        "label":"Remarks",
         "data_type":"Memo",
         "html_type":"TextArea",
         "is_searchable":0,
         "is_view":1,
-        "column_name":"wc_remarks",
+        "column_name":"remarks",
         "weight":-110,
         "is_active":1
       },
-      "wc_sdd_mandate":{
-        "name":"wc_sdd_mandate",
-        "label":"Mandaatcode",
+      "sdd_mandate":{
+        "name":"sdd_mandate",
+        "label":"SDD Mandate",
         "data_type":"String",
         "html_type":"Text",
         "text_length":35,
         "is_searchable":1,
         "is_view":1,
-        "column_name":"wc_sdd_mandate",
+        "column_name":"sdd_mandate",
         "weight":-100,
         "is_active":1
       },
-      "wc_sdd_iban":{
-        "name":"wc_sdd_iban",
+      "sdd_iban":{
+        "name":"sdd_iban",
         "label":"IBAN",
         "data_type":"String",
         "html_type":"Text",
         "text_length":34,
         "is_searchable":0,
         "is_view":1,
-        "column_name":"wc_sdd_iban",
+        "column_name":"sdd_iban",
         "weight":-90,
         "is_active":1
       },
-      "wc_sdd_bank_name":{
-        "name":"wc_sdd_bank_name",
-        "label":"Banknaam",
+      "sdd_bank_name":{
+        "name":"sdd_bank_name",
+        "label":"Bankname",
         "data_type":"String",
         "html_type":"Text",
         "is_searchable":0,
         "is_view":1,
-        "column_name":"wc_sdd_bank_name",
+        "column_name":"sdd_bank_name",
         "weight":-80,
         "is_active":1
       },
-      "wc_sdd_bic":{
-        "name":"wc_sdd_bic",
+      "sdd_bic":{
+        "name":"sdd_bic",
         "label":"BIC",
         "data_type":"String",
         "html_type":"Text",
         "text_length":11,
         "is_searchable":0,
         "is_view":1,
-        "column_name":"wc_sdd_bic",
+        "column_name":"sdd_bic",
         "weight":-70,
         "is_active":1
       },
-      "wc_sdd_amount":{
-        "name":"wc_sdd_amount",
-        "label":"Bedrag",
+      "sdd_amount":{
+        "name":"sdd_amount",
+        "label":"Amount",
         "data_type":"Money",
         "html_type":"Text",
         "is_searchable":0,
         "is_view":1,
-        "column_name":"wc_sdd_amount",
+        "column_name":"sdd_amount",
         "weight":-60,
         "is_active":1
       },
-      "wc_sdd_freq_interval":{
-        "name":"wc_sdd_freq_interval",
-        "label":"Frequentie interval",
+      "sdd_freq_interval":{
+        "name":"sdd_freq_interval",
+        "label":"Frequency Interval",
         "data_type":"Int",
         "html_type":"Text",
         "is_searchable":0,
         "is_view":1,
-        "column_name":"wc_sdd_freq_interval",
+        "column_name":"sdd_freq_interval",
         "weight":-50,
         "is_active":1
       },
-      "wc_sdd_freq_unit":{
-        "name":"wc_sdd_freq_unit",
-        "label":"Frequentie eenheid",
-        "option_group":"frequenceUnit",
+      "sdd_freq_unit":{
+        "name":"sdd_freq_unit",
+        "label":"Frequency Unit",
+        "option_group":"frequency_unit",
         "data_type":"String",
         "html_type":"Select",
         "is_searchable":0,
         "is_view":1,
-        "column_name":"wc_sdd_freq_unit",
+        "column_name":"sdd_freq_unit",
         "weight":-40,
         "is_active":1
       },
-      "wc_sdd_start_date":{
-        "name":"wc_sdd_start_date",
-        "label":"Begindatum",
+      "sdd_start_date":{
+        "name":"sdd_start_date",
+        "label":"Start Date",
         "data_type":"Date",
         "html_type":"Select Date",
         "is_searchable":0,
         "is_view":1,
         "date_format":"dd-mm-yy",
-        "column_name":"wc_sdd_start_date",
+        "column_name":"sdd_start_date",
         "weight":-30,
         "is_active":1
       },
-      "wc_sdd_end_date":{
-        "name":"wc_sdd_end_date",
-        "label":"Einddatum",
+      "sdd_end_date":{
+        "name":"sdd_end_date",
+        "label":"End Date",
         "data_type":"Date",
         "html_type":"Select Date",
         "is_searchable":0,
         "is_view":1,
         "date_format":"dd-mm-yy",
-        "column_name":"wc_sdd_end_date",
+        "column_name":"sdd_end_date",
         "weight":-20,
         "is_active":1
       },
-      "wc_sdd_cancel":{
-        "name":"wc_sdd_cancel",
-        "label":"Annulering gift?",
+      "sdd_cancel":{
+        "name":"sdd_cancel",
+        "label":"Cancel Donation?",
         "data_type":"Boolean",
         "html_type":"Radio",
         "is_searchable":1,
         "is_view":1,
-        "column_name":"wc_sdd_cancel",
+        "column_name":"sdd_cancel",
+        "weight":-10,
+        "is_active":1
+      }
+    }
+  },
+  "initial_recruitment_without_sdd":{
+    "name":"initial_recruitment_without_sdd",
+    "title":"Initial Recruitment without SDD",
+    "extends":"Activity",
+    "extends_entity_column_value":"welcome_call",
+    "table_name":"civicrm_value_initial_recruitment_without_sdd",
+    "is_reserved":1,
+    "collapse_display":0,
+    "is_active":1,
+    "fields":{
+      "date_import":{
+        "name":"date_import",
+        "label":"Date Import",
+        "data_type":"Date",
+        "html_type":"Select Date",
+        "is_searchable":1,
+        "is_search_range":1,
+        "is_view":1,
+        "date_format":"dd-mm-yy",
+        "column_name":"date_import",
+        "weight":-160,
+        "is_active":1
+      },
+      "follow_up_call":{
+        "name":"follow_up_call",
+        "label":"Follow Up Call?",
+        "data_type":"Boolean",
+        "html_type":"Radio",
+        "is_searchable":1,
+        "is_view":1,
+        "column_name":"follow_up_call",
+        "weight":-150,
+        "is_active":1
+      },
+      "newsletter":{
+        "name":"newsletter",
+        "label":"Newsletter?",
+        "data_type":"Boolean",
+        "html_type":"Radio",
+        "is_searchable":1,
+        "is_view":1,
+        "column_name":"newsletter",
+        "weight":-140,
+        "is_active":1
+      },
+      "member":{
+        "name":"member",
+        "label":"Member?",
+        "data_type":"Boolean",
+        "html_type":"Radio",
+        "is_searchable":1,
+        "is_view":1,
+        "column_name":"member",
+        "weight":-130,
+        "is_active":1
+      },
+      "areas_interest":{
+        "name":"areas_interest",
+        "label":"Areas of Interest",
+        "data_type":"String",
+        "html_type":"Multi-Select",
+        "option_group":"areas_of_interest",
+        "is_searchable":1,
+        "is_view":1,
+        "column_name":"areas_interest",
+        "weight":-120,
+        "is_active":1
+      },
+      "remarks":{
+        "name":"remarks",
+        "label":"Remarks",
+        "data_type":"Memo",
+        "html_type":"TextArea",
+        "is_searchable":0,
+        "is_view":1,
+        "column_name":"remarks",
+        "weight":-110,
+        "is_active":1
+      }
+    }
+  },
+  "welcome_call_not_reached": {
+    "name": "welcome_call_not_reached",
+    "title": "Welcome Call not Reached",
+    "extends": "Activity",
+    "extends_entity_column_value": "welcome_call_not_reached",
+    "table_name": "civicrm_value_welcome_call_not_reached",
+    "is_reserved": 1,
+    "collapse_display": 0,
+    "is_active": 1,
+    "fields": {
+      "date_import": {
+        "name": "date_import",
+        "label": "Date Import",
+        "data_type": "Date",
+        "html_type": "Select Date",
+        "is_searchable": 1,
+        "is_search_range": 1,
+        "is_view": 1,
+        "date_format": "dd-mm-yy",
+        "column_name": "date_import",
+        "weight": -160,
+        "is_active": 1
+      }
+    }
+  },
+  "generic_data_correction":{
+    "name":"generic_data_correction",
+    "title":"Generic Data Correction",
+    "extends":"Activity",
+    "extends_entity_column_value":"generic_data_correction",
+    "table_name":"civicrm_value_generic_data_correction",
+    "is_reserved":1,
+    "collapse_display":0,
+    "is_active":1,
+    "fields":{
+      "date_import":{
+        "name":"date_import",
+        "label":"Date Import",
+        "data_type":"Date",
+        "html_type":"Select Date",
+        "is_searchable":1,
+        "is_search_range":1,
+        "is_view":1,
+        "date_format":"dd-mm-yy",
+        "column_name":"date_import",
+        "weight":-160,
+        "is_active":1
+      },
+      "follow_up_call":{
+        "name":"follow_up_call",
+        "label":"Follow Up Call?",
+        "data_type":"Boolean",
+        "html_type":"Radio",
+        "is_searchable":1,
+        "is_view":1,
+        "column_name":"follow_up_call",
+        "weight":-150,
+        "is_active":1
+      },
+      "newsletter":{
+        "name":"newsletter",
+        "label":"Newsletter?",
+        "data_type":"Boolean",
+        "html_type":"Radio",
+        "is_searchable":1,
+        "is_view":1,
+        "column_name":"newsletter",
+        "weight":-140,
+        "is_active":1
+      },
+      "member":{
+        "name":"member",
+        "label":"Member?",
+        "data_type":"Boolean",
+        "html_type":"Radio",
+        "is_searchable":1,
+        "is_view":1,
+        "column_name":"member",
+        "weight":-130,
+        "is_active":1
+      },
+      "areas_interest":{
+        "name":"areas_interest",
+        "label":"Areas of Interest",
+        "data_type":"String",
+        "html_type":"Multi-Select",
+        "option_group":"areas_of_interest",
+        "is_searchable":1,
+        "is_view":1,
+        "column_name":"areas_interest",
+        "weight":-120,
+        "is_active":1
+      },
+      "remarks":{
+        "name":"remarks",
+        "label":"Remarks",
+        "data_type":"Memo",
+        "html_type":"TextArea",
+        "is_searchable":0,
+        "is_view":1,
+        "column_name":"remarks",
+        "weight":-110,
+        "is_active":1
+      }
+    }
+  },
+  "add_update_sdd":{
+    "name":"add_update_sdd",
+    "title":"Add or Update SDD",
+    "extends":"Activity",
+    "extends_entity_column_value":"add_update_sdd",
+    "table_name":"civicrm_value_add_update_sdd",
+    "is_reserved":1,
+    "collapse_display":0,
+    "is_active":1,
+    "fields":{
+      "date_import":{
+        "name":"date_import",
+        "label":"Date Import",
+        "data_type":"Date",
+        "html_type":"Select Date",
+        "is_searchable":1,
+        "is_search_range":1,
+        "is_view":1,
+        "date_format":"dd-mm-yy",
+        "column_name":"date_import",
+        "weight":-160,
+        "is_active":1
+      },
+      "sdd_mandate":{
+        "name":"sdd_mandate",
+        "label":"SDD Mandate",
+        "data_type":"String",
+        "html_type":"Text",
+        "text_length":35,
+        "is_searchable":1,
+        "is_view":1,
+        "column_name":"sdd_mandate",
+        "weight":-100,
+        "is_active":1
+      },
+      "sdd_iban":{
+        "name":"sdd_iban",
+        "label":"IBAN",
+        "data_type":"String",
+        "html_type":"Text",
+        "text_length":34,
+        "is_searchable":0,
+        "is_view":1,
+        "column_name":"sdd_iban",
+        "weight":-90,
+        "is_active":1
+      },
+      "sdd_bank_name":{
+        "name":"sdd_bank_name",
+        "label":"Bankname",
+        "data_type":"String",
+        "html_type":"Text",
+        "is_searchable":0,
+        "is_view":1,
+        "column_name":"sdd_bank_name",
+        "weight":-80,
+        "is_active":1
+      },
+      "sdd_bic":{
+        "name":"sdd_bic",
+        "label":"BIC",
+        "data_type":"String",
+        "html_type":"Text",
+        "text_length":11,
+        "is_searchable":0,
+        "is_view":1,
+        "column_name":"sdd_bic",
+        "weight":-70,
+        "is_active":1
+      },
+      "sdd_amount":{
+        "name":"sdd_amount",
+        "label":"Amount",
+        "data_type":"Money",
+        "html_type":"Text",
+        "is_searchable":0,
+        "is_view":1,
+        "column_name":"sdd_amount",
+        "weight":-60,
+        "is_active":1
+      },
+      "sdd_freq_interval":{
+        "name":"sdd_freq_interval",
+        "label":"Frequency Interval",
+        "data_type":"Int",
+        "html_type":"Text",
+        "is_searchable":0,
+        "is_view":1,
+        "column_name":"sdd_freq_interval",
+        "weight":-50,
+        "is_active":1
+      },
+      "sdd_freq_unit":{
+        "name":"sdd_freq_unit",
+        "label":"Frequency Unit",
+        "option_group":"frequency_unit",
+        "data_type":"String",
+        "html_type":"Select",
+        "is_searchable":0,
+        "is_view":1,
+        "column_name":"sdd_freq_unit",
+        "weight":-40,
+        "is_active":1
+      },
+      "sdd_start_date":{
+        "name":"sdd_start_date",
+        "label":"Start Date",
+        "data_type":"Date",
+        "html_type":"Select Date",
+        "is_searchable":0,
+        "is_view":1,
+        "date_format":"dd-mm-yy",
+        "column_name":"sdd_start_date",
+        "weight":-30,
+        "is_active":1
+      },
+      "sdd_end_date":{
+        "name":"sdd_end_date",
+        "label":"End Date",
+        "data_type":"Date",
+        "html_type":"Select Date",
+        "is_searchable":0,
+        "is_view":1,
+        "date_format":"dd-mm-yy",
+        "column_name":"sdd_end_date",
+        "weight":-20,
+        "is_active":1
+      },
+      "sdd_cancel":{
+        "name":"sdd_cancel",
+        "label":"Cancel Donation?",
+        "data_type":"Boolean",
+        "html_type":"Radio",
+        "is_searchable":1,
+        "is_view":1,
+        "column_name":"sdd_cancel",
         "weight":-10,
         "is_active":1
       }
     }
   },
   "recruiterInformation":{
-    "name":"recruiterInformation",
-    "title":"Werver Informatie",
+    "name":"recruiter_information",
+    "title":"Recruiter Information",
     "extends":"Individual",
     "extends_entity_column_value":["recruiter"],
     "style":"Inline",
@@ -442,7 +770,7 @@
     "fields":{
       "external_recruiter_id":{
         "name":"external_recruiter_id",
-        "label":"Extern Werver ID",
+        "label":"External Recruiter ID",
         "data_type":"String",
         "html_type":"Text",
         "is_searchable":1,
@@ -453,19 +781,19 @@
       }
     }
   },
-  "importError":{
-    "name":"importError",
-    "title":"Foutieve data import",
+  "street_import_error":{
+    "name":"street_import_error",
+    "title":"Street Import Error",
     "extends":"Activity",
-    "extends_entity_column_value":"importError",
-    "table_name":"civicrm_value_import_error",
+    "extends_entity_column_value":"street_import_error",
+    "table_name":"civicrm_value_street_import_error",
     "is_reserved":1,
     "collapse_display":0,
     "is_active":1,
     "fields":{
       "error_type":{
         "name":"error_type",
-        "label":"Type fout",
+        "label":"Error Type",
         "data_type":"String",
         "html_type":"Select",
         "is_searchable":1,

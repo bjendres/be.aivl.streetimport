@@ -2,11 +2,11 @@
   "recruiter":
     {
       "name_a_b": "recruiter_is",
-      "label_a_b":"Werver is",
+      "label_a_b":"Recruiter is",
       "contact_type_a":"Organization",
-      "contact_sub_type_a":"recruitingOrganization",
+      "contact_sub_type_a":"recruiting_organization",
       "name_b_a": "recruiter_for",
-      "label_b_a":"Werver voor",
+      "label_b_a":"Recruiter for",
       "contact_type_b":"Individual",
       "contact_sub_type_b":"recruiter",
       "is_active":1,

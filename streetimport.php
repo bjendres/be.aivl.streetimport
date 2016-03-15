@@ -58,7 +58,7 @@ function streetimport_civicrm_install() {
     CRM_Core_Error::fatal('One (or more) of the mandatory extensions SEPA Direct Debit, CiviBanking or Little Bic Extension not found, could not install Street Recruitment Import extension');
   }
   _streetimport_civix_civicrm_install();
-  CRM_Streetimport_Config::singleton('install');
+  new CRM_Streetimport_Config_LoadConfig();
 }
 
 /**
@@ -157,37 +157,20 @@ function streetimport_civicrm_alterSettingsFolders(&$metaDataFolders = NULL) {
  * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_navigationMenu
  */
 function streetimport_civicrm_navigationMenu(&$params) {
-
-  //add menu entry for Import settings to Administer>CiviContribute menu
-  $importSettingsUrl = 'civicrm/admin/setting/aivl_import_settings';
-  // now, by default we want to add it to the CiviContribute Administer menu -> find it
-  $administerMenuId = 0;
-  $administerCiviContributeMenuId = 0;
-  foreach ($params as $key => $value) {
-    if ($value['attributes']['name'] == 'Administer') {
-      $administerMenuId = $key;
-      foreach ($params[$administerMenuId]['child'] as $childKey => $childValue) {
-        if ($childValue['attributes']['name'] == 'CiviContribute') {
-          $administerCiviContributeMenuId = $childKey;
-          break;
-        }
-      }
-      break;
-    }
-  }
-  if (empty($administerMenuId)) {
-    error_log('be.aivl.streetimport: Cannot find parent menu Administer/CiviContribute for '.$importSettingsUrl);
-  } else {
-    $importSettingsMenu = array (
-      'label' => ts('AIVL Import Settings',array('domain' => 'be.aivl.streetimport')),
-      'name' => 'AIVL Import Settings',
-      'url' => $importSettingsUrl,
-      'permission' => 'administer CiviCRM',
-      'operator' => NULL,
-      'parentID' => $administerCiviContributeMenuId,
-      'navID' => CRM_Streetimport_Utils::createUniqueNavID($params[$administerMenuId]['child']),
-      'active' => 1
-    );
-    CRM_Streetimport_Utils::addNavigationMenuEntry($params[$administerMenuId]['child'][$administerCiviContributeMenuId], $importSettingsMenu);
-  }
+  $maxKey = CRM_Streetimport_Utils::getMaxMenuKey($params);
+  $menuAdministerId = CRM_Core_DAO::getFieldValue('CRM_Core_DAO_Navigation', 'Administer', 'id', 'name');
+  $menuParentId = CRM_Core_DAO::getFieldValue('CRM_Core_DAO_Navigation', 'CiviContribute', 'id', 'name');
+  $params[$menuAdministerId]['child'][$menuParentId]['child'][$maxKey+1] = array (
+      'attributes' => array (
+        'label'      => ts('AIVL Street Import Settings'),
+        'name'       => ts('AIVL Street Import Settings'),
+        'url'        => CRM_Utils_System::url('civicrm/siloadtypelist', 'reset=1', true),
+        'permission' => 'administer CiviCRM',
+        'operator'   => NULL,
+        'separator'  => NULL,
+        'parentID'   => $menuParentId,
+        'navID'      => $maxKey+1,
+        'active'     => 1
+      ),
+  );
 }

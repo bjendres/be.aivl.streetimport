@@ -1,20 +1,21 @@
 <div class="crm-content-block crm-block">
   <div id="help">
-    The existing load types are listed below. You can add, edit the settings or delete them from this screen.
+    {$pageHelpText}
   </div>
   <div class="action-link">
     <a class="button new-option" href="{$addUrl}">
-      <span><div class="icon add-icon"></div>{ts}Add Load Type{/ts}</span>
+      <span><div class="icon add-icon"></div>{$addButtonLabel}</span>
     </a>
   </div>
-  {include file="CRM/common/pager.tpl" location="top"}
   {include file='CRM/common/jsortable.tpl'}
-  <div id="laod_type-wrapper" class="dataTables_wrapper">
-    <table id="load_type-table" class="display">
+  <div id="load-type-wrapper" class="dataTables_wrapper">
+    <table id="load-type-table" class="display">
       <thead>
       <tr>
-        <th>{ts}Load Type ID{/ts}</th>
-        <th>{ts}Load Type{/ts}</th>
+        <th>{ts}ID{/ts}</th>
+        <th>{$loadTypeLabel}</th>
+        <th>{$predecessorLabel}</th>
+        <th>{$uniqueLabel}</th>
         <th id="nosort"></th>
       </tr>
       </thead>
@@ -26,13 +27,9 @@
         <tr id="row{$rowCount}" class={$rowClass}>
           <td>{$loadTypeId}</td>
           <td>{$loadType.label}</td>
-          <td>
-              <span>
-                {foreach from=$loadType.actions item=actionLink}
-                  {$actionLink}
-                {/foreach}
-              </span>
-          </td>
+          <td>{$loadType.predecessor}</td>
+          <td>{$loadType.unique}</td>
+          <td><span>{$loadType.action}</span></td>
         </tr>
         {if $rowClass eq "odd-row"}
           {assign var="rowClass" value="even-row"}
@@ -43,10 +40,9 @@
       </tbody>
     </table>
   </div>
-  {include file="CRM/common/pager.tpl" location="bottom"}
   <div class="action-link">
     <a class="button new-option" href="{$addUrl}">
-      <span><div class="icon add-icon"></div>{ts}Add Load Type{/ts}</span>
+      <span><div class="icon add-icon"></div>{$addButtonLabel}</span>
     </a>
   </div>
 </div>

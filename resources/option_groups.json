@@ -1,4 +1,46 @@
 {
-  "frequencyUnit":"Frequentie eenheid",
-  "areasOfInterest":"Interesse in campagnes"
+  "areas_of_interest": {
+    "name": "areas_of_interest",
+    "title": "Areas of Interest",
+    "is_active": "1",
+    "is_reserved": "1"
+  },
+  "frequency_unit": {
+    "name": "frequency_unit",
+    "title": "Frequency Unit",
+    "is_active": "1",
+    "is_reserved": "1",
+    "option_values": {
+      "one_off": {
+        "name": "one_off",
+        "value": 5,
+        "label": "eenmalig",
+        "is_active": 1
+      },
+      "half_year": {
+        "name": "half_year",
+        "value": 3,
+        "label": "halfjaar",
+        "is_active": 1
+      },
+      "annual": {
+        "name": "annual",
+        "value": 4,
+        "label": "jaar",
+        "is_active": 1
+      },
+      "quarter": {
+        "name": "quarter",
+        "value": 2,
+        "label": "kwartaal",
+        "is_active": 1
+      },
+      "month": {
+        "name": "month",
+        "value": 1,
+        "label": "maand",
+        "is_active": 1
+      }
+    }
+  }
 }

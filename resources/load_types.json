@@ -1,0 +1,44 @@
+{
+  "street_recruitment": {
+    "id":1,
+    "name":"street_recruitment",
+    "label":"Initial recruitment with SDD",
+    "predecessor":0,
+    "unique":1
+  },
+  "welcome_call": {
+    "id":2,
+    "name":"welcome_call",
+    "label":"Welcome Call",
+    "predecessor":"street_recruitment",
+    "unique":1
+  },
+  "welcome_call_not_reached": {
+    "id":3,
+    "name":"welcome_call_not_reached",
+    "label":"Welcome Call Not Reached",
+    "predecessor":"street_recruitment",
+    "unique":1
+  },
+  "street_recruitment_no_sdd": {
+    "id":4,
+    "name":"street_recruitment_no_sdd",
+    "label":"Initial recruitment without SDD",
+    "predecessor":"",
+    "unique":1
+  },
+  "following_sdd": {
+    "id":5,
+    "name":"following_sdd",
+    "label":"Add or Update SDD",
+    "predecessor":"street_recruitment_no_sdd",
+    "unique":1
+  },
+  "update_generic_data": {
+    "id":6,
+    "name":"update_generic_data",
+    "label":"Generic Data Correction",
+    "predecessor":["street_recruitment", "street_recruitment_no_sdd"],
+    "unique":0
+  }
+}

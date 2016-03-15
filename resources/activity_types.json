@@ -1,6 +1,42 @@
 {
-  "streetRecruitment":"Straatwerving",
-  "welcomeCall":"Welkomstgesprek",
-  "followUpCall":"Opvolgingsgesprek",
-  "importError":"Foutieve data import"
+  "initial_recruitment":{
+    "name": "initial_recruitment",
+    "label": "Initial Recruitment with SDD (Street Import)",
+    "is_active": 1
+  },
+  "welcome_call":{
+    "name": "welcome_call",
+    "label": "Welcome Call (Street Import)",
+    "is_active": 1
+  },
+  "welcome_call_not_reached":{
+    "name": "welcome_call_not_reached",
+    "label": "Welcome Call not Reached (Street Import)",
+    "is_active": 1
+  },
+  "initial_recruitment_without_sdd":{
+    "name": "initial_recruitment_without_sdd",
+    "label": "Initial Recruitment without SDD (Street Import)",
+    "is_active": 1
+  },
+  "add_update_sdd":{
+    "name": "add_update_sdd",
+    "label": "Add or Update SDD (Street Import)",
+    "is_active": 1
+  },
+  "generic_data_correction":{
+    "name": "generic_data_correction",
+    "label": "Generic Data Correction (Street Import)",
+    "is_active": 1
+  },
+  "follow_up_call":{
+    "name": "follow_up_call",
+    "label": "Follow Up Call (Street Import)",
+    "is_active": 1
+  },
+  "street_import_error":{
+    "name": "street_import_error",
+    "label": "Street Import Error",
+    "is_active": 1
+  }
 }
